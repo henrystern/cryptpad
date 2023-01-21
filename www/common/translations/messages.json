@@ -421,6 +421,8 @@
     "settings_codeIndentation": "Code editor indentation (spaces)",
     "settings_codeUseTabs": "Indent using tabs (instead of spaces)",
     "settings_codeFontSize": "Font size in the code editor",
+    "settings_codeKeymapTitle": "Key mappings",
+    "settings_codeKeymapDefault": "Basic",
     "settings_padWidth": "Editor's maximum width",
     "settings_padWidthHint": "Switch between page mode (default) that limits the width of the text editor, and using the full width of the screen.",
     "settings_padWidthLabel": "Reduce the editor's width",

@@ -95,6 +95,7 @@ define([
             'cp-settings-code-brackets',
             'cp-settings-code-font-size',
             'cp-settings-code-spellcheck',
+            'cp-settings-code-keymap',
         ],
         'kanban': [ // Msg.settings_cat_kanban
             'cp-settings-kanban-tags',
@@ -1603,6 +1604,65 @@ define([
                 $checkbox.attr('checked', 'checked');
             }
         });
+        return $div;
+    };
+
+    create['code-keymap'] = function() {
+        var $div = $('<div>', { 'class': 'cp-settings-code-keymap cp-sidebarlayout-element' });
+
+        $('<span>', { 'class': 'label' }).text(Messages.settings_codeKeymapTitle).appendTo($div);
+
+        var $ok = $('<span>', { 'class': 'fa fa-check', title: Messages.saved });
+        var $spinner = $('<span>', { 'class': 'fa fa-spinner fa-pulse' });
+
+        var opt1 = UI.createRadio('cp-settings-code-keymap', 'cp-settings-code-keymap-default',
+            Messages.settings_codeKeymapDefault, true, {
+                input: { value: 'default' },
+                label: { class: 'noTitle' }
+            });
+        var opt2 = UI.createRadio('cp-settings-code-keymap', 'cp-settings-code-keymap-vim',
+            "Vim", false, { // I figure these are proper nouns that don't need translating
+                input: { value: 'vim' },
+                label: { class: 'noTitle' }
+            });
+        var opt3 = UI.createRadio('cp-settings-code-keymap', 'cp-settings-code-keymap-emacs',
+            "Emacs", false, {
+                input: { value: 'emacs' },
+                label: { class: 'noTitle' }
+            });
+        var opt4 = UI.createRadio('cp-settings-code-keymap', 'cp-settings-code-keymap-sublime',
+            "Sublime Text", false, {
+                input: { value: 'sublime' },
+                label: { class: 'noTitle' }
+            });
+        var $div2 = $(h('div.cp-settings-radio-container', [
+            opt1,
+            opt2,
+            opt3,
+            opt4
+        ])).appendTo($div);
+
+        $div.find('input[type="radio"]').on('change', function() {
+            $spinner.show();
+            $ok.hide();
+            var val = $('input:radio[name="cp-settings-code-keymap"]:checked').val();
+            val = val || 'default';
+            common.setAttribute(['codemirror', 'keymap'], val, function() {
+                $spinner.hide();
+                $ok.show();
+            });
+        });
+
+        $ok.hide().appendTo($div2);
+        $spinner.hide().appendTo($div2);
+
+        common.getAttribute(['codemirror', 'keymap'], function(err, val) {
+            if (val === 'vim') { return void $('#cp-settings-code-keymap-vim').prop('checked', true); }
+            if (val === 'emacs') { return void $('#cp-settings-code-keymap-emacs').prop('checked', true); }
+            if (val === 'sublime') { return void $('#cp-settings-code-keymap-sublime').prop('checked', true); }
+            $('#cp-settings-code-keymap-default').prop('checked', true);
+        });
+
         return $div;
     };
 
