@@ -149,7 +149,7 @@ define([
             editor.setOption('indentWithTabs', useTabs);
             editor.setOption('spellcheck', spellcheck);
             editor.setOption('autoCloseBrackets', brackets);
-            editor.setOption('keyMap', keymap)
+            editor.setOption('keyMap', keymap);
             setTimeout(function () {
                 $('.CodeMirror').css('font-size', fontSize+'px');
                 editor.refresh();
