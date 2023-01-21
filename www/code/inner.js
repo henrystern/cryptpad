@@ -15,7 +15,6 @@ define([
     '/customize/messages.js',
     'cm/lib/codemirror',
 
-
     'css!cm/lib/codemirror.css',
     'css!cm/addon/dialog/dialog.css',
     'css!cm/addon/fold/foldgutter.css',
@@ -41,6 +40,10 @@ define([
     'cm/addon/fold/markdown-fold',
     'cm/addon/fold/comment-fold',
     'cm/addon/display/placeholder',
+    'cm/keymap/vim', // does the org mode script inherit these? If not then need to add the keymaps there as well, but it seems to work fine without.
+    'cm/keymap/emacs',
+    'cm/keymap/sublime',
+
 
     'css!/customize/src/print.css',
     'less!/code/app-code.less'

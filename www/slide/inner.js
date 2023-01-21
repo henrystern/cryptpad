@@ -43,6 +43,9 @@ define([
     'cm/addon/fold/markdown-fold',
     'cm/addon/fold/comment-fold',
     'cm/addon/display/placeholder',
+    'cm/keymap/vim',
+    'cm/keymap/emacs',
+    'cm/keymap/sublime',
 
 ], function (
     $,
