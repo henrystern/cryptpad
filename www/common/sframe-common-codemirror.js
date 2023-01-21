@@ -141,7 +141,7 @@ define([
     };
 
     module.mkIndentSettings = function (editor, metadataMgr) {
-        var setIndentation = function (units, useTabs, fontSize, spellcheck, brackets) {
+        var setIndentation = function (units, useTabs, fontSize, spellcheck, brackets, keymap) {
             if (typeof(units) !== 'number') { return; }
             var doc = editor.getDoc();
             editor.setOption('indentUnit', units);
@@ -149,6 +149,7 @@ define([
             editor.setOption('indentWithTabs', useTabs);
             editor.setOption('spellcheck', spellcheck);
             editor.setOption('autoCloseBrackets', brackets);
+            editor.setOption('keyMap', keymap)
             setTimeout(function () {
                 $('.CodeMirror').css('font-size', fontSize+'px');
                 editor.refresh();
@@ -195,12 +196,14 @@ define([
             var fontSize = data[fontKey];
             var spellcheck = data[spellcheckKey];
             var brackets = data.brackets;
+            var keymap = data.keymap;
             setIndentation(
                 typeof(indentUnit) === 'number'? indentUnit : 2,
                 typeof(useTabs) === 'boolean'? useTabs : false,
                 typeof(fontSize) === 'number' ? fontSize : 12,
                 typeof(spellcheck) === 'boolean' ? spellcheck : false,
-                typeof(brackets) === 'boolean' ? brackets : true);
+                typeof(brackets) === 'boolean' ? brackets : true,
+                typeof(keymap) === 'string' ? keymap : 'default');
         };
         metadataMgr.onChangeLazy(updateIndentSettings);
         updateIndentSettings();
